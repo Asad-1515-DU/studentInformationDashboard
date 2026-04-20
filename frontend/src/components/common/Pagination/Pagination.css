@@ -1,0 +1,130 @@
+/**
+ * Pagination Styles
+ */
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid #1E293B;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.pagination__info {
+  font-size: 14px;
+  color: #9CA3AF;
+  min-width: fit-content;
+}
+
+.pagination__controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pagination__button {
+  padding: 8px 12px;
+  background-color: #1E293B;
+  color: #3B82F6;
+  border: 1px solid #3B82F6;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.pagination__button:hover:not(:disabled) {
+  background-color: #3B82F6;
+  color: #FFFFFF;
+  border-color: #3B82F6;
+}
+
+.pagination__button:active:not(:disabled) {
+  background-color: #1D4ED8;
+  border-color: #1D4ED8;
+}
+
+.pagination__button:disabled {
+  color: #475569;
+  border-color: #1E293B;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pagination__pages {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pagination__page {
+  min-width: 36px;
+  height: 36px;
+  padding: 6px;
+  background-color: #1E293B;
+  color: #3B82F6;
+  border: 1px solid #3B82F6;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination__page:hover:not(:disabled) {
+  background-color: #0F172A;
+  border-color: #60A5FA;
+  color: #60A5FA;
+}
+
+.pagination__page:disabled {
+  color: #475569;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pagination__page--active {
+  background-color: #3B82F6;
+  color: #FFFFFF;
+  border-color: #3B82F6;
+}
+
+.pagination__ellipsis {
+  color: #999;
+  padding: 6px 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pagination {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pagination__info {
+    width: 100%;
+    text-align: center;
+  }
+
+  .pagination__controls {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .pagination__button {
+    flex: 1;
+  }
+
+  .pagination__pages {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

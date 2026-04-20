@@ -1,0 +1,447 @@
+/* ScholarshipStatusUpdate.css */
+
+:root {
+  --primary-color: #007bff;
+  --primary-hover: #0056b3;
+  --danger-color: #dc3545;
+  --danger-hover: #c82333;
+  --text-primary: #1a1a1a;
+  --text-secondary: #666;
+  --text-muted: #999;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --border-color: #ddd;
+  --border-radius: 8px;
+  --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.3);
+  --transition: all 0.3s ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --text-muted: #808080;
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2a2a2a;
+    --border-color: #444;
+  }
+}
+
+/* Modal Container */
+.scholarship-status-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Overlay */
+.scholarship-status-modal__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+/* Content */
+.scholarship-status-modal__content {
+  position: relative;
+  background: var(--bg-primary);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Header */
+.scholarship-status-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.scholarship-status-modal__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.scholarship-status-modal__close {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.scholarship-status-modal__close:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Body */
+.scholarship-status-modal__body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Scholarship Info */
+.scholarship-status-modal__info {
+  margin-bottom: 2rem;
+}
+
+.scholarship-status-modal__scholarship-name {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.scholarship-status-modal__provider {
+  margin: 0.35rem 0 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Fieldset */
+.scholarship-status-modal__fieldset {
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 1.25rem;
+  background: var(--bg-secondary);
+}
+
+.scholarship-status-modal__legend {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: 0 0.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* Current Status */
+.scholarship-status-modal__current-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.status-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.status-badge.status-available {
+  background-color: rgba(40, 167, 69, 0.15);
+  color: #28a745;
+}
+
+.status-badge.status-closed {
+  background-color: rgba(255, 193, 7, 0.15);
+  color: #ffc107;
+}
+
+.status-badge.status-archived {
+  background-color: rgba(108, 117, 125, 0.15);
+  color: #6c757d;
+}
+
+/* Options */
+.scholarship-status-modal__options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.scholarship-status-modal__option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.scholarship-status-modal__option:hover {
+  background: var(--bg-primary);
+  border-color: var(--primary-color);
+}
+
+.scholarship-status-modal__radio {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.scholarship-status-modal__radio:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.scholarship-status-modal__option-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.option-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.option-description {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Danger Zone */
+.scholarship-status-modal__danger-zone {
+  padding: 1rem;
+  background: rgba(220, 53, 69, 0.08);
+  border: 1px solid rgba(220, 53, 69, 0.2);
+  border-radius: 6px;
+}
+
+.scholarship-status-modal__danger-title {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--danger-color);
+}
+
+.scholarship-status-modal__danger-description {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.scholarship-status-modal__button--delete {
+  width: 100%;
+  color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+
+.scholarship-status-modal__button--delete:hover:not(:disabled) {
+  background: rgba(220, 53, 69, 0.1);
+}
+
+/* Delete Confirmation */
+.delete-confirmation {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.delete-confirmation__icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.delete-confirmation__title {
+  margin: 0 0 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.delete-confirmation__message {
+  margin: 0 0 0.5rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.delete-confirmation__warning {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--danger-color);
+  line-height: 1.5;
+}
+
+/* Footer */
+.scholarship-status-modal__footer {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+}
+
+/* Buttons */
+.scholarship-status-modal__button {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 40px;
+}
+
+.scholarship-status-modal__button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.scholarship-status-modal__button--cancel {
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+.scholarship-status-modal__button--cancel:hover:not(:disabled) {
+  background: var(--bg-secondary);
+  border-color: var(--text-secondary);
+}
+
+.scholarship-status-modal__button--save {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.scholarship-status-modal__button--save:hover:not(:disabled) {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.scholarship-status-modal__button--confirm-delete {
+  background: var(--danger-color);
+  color: white;
+  border-color: var(--danger-color);
+}
+
+.scholarship-status-modal__button--confirm-delete:hover:not(:disabled) {
+  background: var(--danger-hover);
+  border-color: var(--danger-hover);
+}
+
+/* Spinner */
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-right-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .scholarship-status-modal__content {
+    width: 95%;
+    max-height: 95vh;
+  }
+
+  .scholarship-status-modal__header {
+    padding: 1rem;
+  }
+
+  .scholarship-status-modal__title {
+    font-size: 1.1rem;
+  }
+
+  .scholarship-status-modal__body {
+    padding: 1rem;
+  }
+
+  .scholarship-status-modal__footer {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  .scholarship-status-modal__button {
+    width: 100%;
+  }
+
+  .scholarship-status-modal__fieldset {
+    padding: 1rem;
+  }
+
+  .scholarship-status-modal__option {
+    padding: 0.6rem;
+  }
+
+  .delete-confirmation {
+    padding: 1.5rem 0;
+  }
+}

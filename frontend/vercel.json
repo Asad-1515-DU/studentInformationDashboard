@@ -1,0 +1,17 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "./dist",
+  "installCommand": "npm install",
+  "framework": "vite",
+  "nodeVersion": "18.x",
+  "env": {
+    "VITE_REACT_APP_API_URL": "@vite_react_app_api_url"
+  },
+  "redirects": [
+    {
+      "source": "/:path((?!.*\\.).*)",
+      "destination": "/index.html",
+      "statusCode": 200
+    }
+  ]
+}

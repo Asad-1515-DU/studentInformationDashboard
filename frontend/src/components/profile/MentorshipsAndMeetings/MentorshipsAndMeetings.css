@@ -1,0 +1,422 @@
+/* MentorshipsAndMeetings Component Styles */
+
+.mentorships-and-meetings {
+  background: #1E293B;
+  border: 1px solid #3B82F6;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
+}
+
+/* Tabs */
+
+.maM__tabs {
+  display: flex;
+  background: rgba(59, 130, 246, 0.1);
+  border-bottom: 2px solid #3B82F6;
+}
+
+.maM__tab {
+  flex: 1;
+  padding: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #9CA3AF;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.maM__tab:hover {
+  color: #E5E7EB;
+  background: rgba(59, 130, 246, 0.15);
+}
+
+.maM__tab.active {
+  color: #60A5FA;
+  border-bottom: 3px solid #3B82F6;
+  margin-bottom: -2px;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+/* Content */
+
+.maM__content {
+  padding: 2rem;
+}
+
+.maM__title {
+  margin: 0 0 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #E5E7EB;
+}
+
+/* Mentors List */
+
+.maM__mentor-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.mentor-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid #3B82F6;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.mentor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.2);
+  border-color: #60A5FA;
+}
+
+.mentor-card__avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.mentor-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mentor-card__name {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #E5E7EB;
+}
+
+.mentor-card__title {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #60A5FA;
+  font-weight: 500;
+}
+
+.mentor-card__department {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #9CA3AF;
+}
+
+.mentor-card__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.contact-link {
+  font-size: 0.9rem;
+  color: #60A5FA;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.contact-link:hover {
+  opacity: 0.7;
+}
+
+.mentor-card__specialization,
+.mentor-card__bio,
+.mentor-card__meta {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #9CA3AF;
+  line-height: 1.5;
+}
+
+/* Meetings List */
+
+.maM__meetings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.meetings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.meetings-section__title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #E5E7EB;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #3B82F6;
+}
+
+.meeting-card {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid #3B82F6;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.meeting-card:hover {
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.15);
+}
+
+.meeting-card--past {
+  opacity: 0.7;
+}
+
+.meeting-card__date {
+  flex-shrink: 0;
+}
+
+.date-box {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+
+.date-box.past {
+  background: #475569;
+  color: #9CA3AF;
+}
+
+.date-month {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.date-day {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.meeting-card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.meeting-card__title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #E5E7EB;
+}
+
+.meeting-card__mentor {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #9CA3AF;
+}
+
+.meeting-card__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0.5rem 0;
+}
+
+.detail {
+  font-size: 0.9rem;
+  color: #9CA3AF;
+}
+
+.meeting-card__description {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  color: #9CA3AF;
+  line-height: 1.4;
+}
+
+.meeting-card__note {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  color: #9CA3AF;
+  font-style: italic;
+}
+
+.meeting-card__status {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+.meeting-card__status.status-scheduled {
+  background: rgba(59, 130, 246, 0.2);
+  color: #93c5fd;
+}
+
+.meeting-card__status.status-completed {
+  background: rgba(16, 185, 129, 0.2);
+  color: #86efac;
+}
+
+.meeting-card__status.status-cancelled {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+/* Empty State */
+
+.maM__empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  text-align: center;
+  color: var(--text-secondary, #666);
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.maM__empty-state p {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--text-primary, #1a1a1a);
+}
+
+.maM__empty-state small {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary, #666);
+}
+
+/* Loading State */
+
+.maM__loading {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mentor-card--skeleton,
+.meeting-card--skeleton {
+  height: 100px;
+  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  border-radius: 8px;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+  .maM__content {
+    padding: 1.5rem;
+  }
+
+  .maM__tabs {
+    flex-wrap: wrap;
+  }
+
+  .maM__tab {
+    flex: 1 1 50%;
+  }
+
+  .maM__mentor-list {
+    grid-template-columns: 1fr;
+  }
+
+  .meeting-card {
+    flex-direction: column;
+  }
+
+  .meeting-card__date {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .mentorships-and-meetings {
+    border-radius: 6px;
+  }
+
+  .maM__content {
+    padding: 1rem;
+  }
+
+  .maM__title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .mentor-card {
+    padding: 1rem;
+  }
+
+  .meeting-card {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .meeting-card__details {
+    gap: 0.5rem;
+  }
+
+  .detail {
+    font-size: 0.85rem;
+  }
+}
+
+/* Dark Mode Support */
+
+@media (prefers-color-scheme: dark) {
+  .mentorships-and-meetings {
+    --card-bg: #2a2a2a;
+    --border-light: #444;
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --stat-bg: #333;
+  }
+}

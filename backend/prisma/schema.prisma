@@ -1,0 +1,278 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Student Entity: Core student information
+model Student {
+  id              String    @id @default(cuid())
+  email           String    @unique @db.VarChar(255)
+  name            String    @db.VarChar(100)
+  dateOfBirth     DateTime
+  phone           String?   @db.VarChar(20)
+  address         String?   @db.VarChar(500)
+  
+  // Academic Information
+  major           String?   @db.VarChar(100)
+  gpa             Float?    @default(0.0) // Overall GPA on 4.0 scale
+  majorGPA        Float?    @default(0.0) // Major-specific GPA
+  creditsCompleted Int?     @default(0) // Total credits completed
+  coursesCompleted Int?     @default(0) // Total courses completed
+  academicYear    Int       @default(1) // 1-4 year level
+  
+  // Status: ACTIVE, INACTIVE, GRADUATED, SUSPENDED
+  status          String    @default("ACTIVE") @db.VarChar(20)
+  enrollmentDate  DateTime  @default(now())
+  
+  // Foreign Keys
+  mentorId        String?
+  mentor          Mentor?   @relation("MentorStudents", fields: [mentorId], references: [id], onDelete: SetNull)
+  
+  // Relations
+  scholarshipAssignments StudentScholarship[]
+  meetings        Meeting[]
+  progressRecords Progress[]
+  courses         StudentCourse[]
+  
+  // Timestamps
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Indexes for efficient queries
+  @@unique([email, enrollmentDate])
+  @@index([mentorId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+// Scholarship Entity: Scholarship programs
+model Scholarship {
+  id              String    @id @default(cuid())
+  name            String    @unique @db.VarChar(255)
+  description     String?   @db.Text
+  amount          Decimal   @db.Decimal(12, 2) // Max 999,999.99
+  
+  // Date range validation
+  startDate       DateTime
+  endDate         DateTime
+  
+  // Status: ACTIVE, EXPIRED, PENDING, DISCONTINUED
+  status          String    @default("ACTIVE") @db.VarChar(20)
+  maxAwardees     Int?      // Maximum students can receive
+  
+  // Relations
+  studentAssignments StudentScholarship[]
+  
+  // Timestamps
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Indexes for efficient queries
+  @@index([status])
+  @@index([startDate])
+  @@index([endDate])
+}
+
+// Junction Table: Many-to-Many relationship between Student and Scholarship
+model StudentScholarship {
+  id                String    @id @default(cuid())
+  
+  // Foreign Keys
+  studentId         String
+  student           Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  
+  scholarshipId     String
+  scholarship       Scholarship @relation(fields: [scholarshipId], references: [id], onDelete: Cascade)
+  
+  // Assignment details
+  awardedAmount     Decimal?  @db.Decimal(12, 2)
+  awardedDate       DateTime
+  status            String    @default("ACTIVE") @db.VarChar(20) // ACTIVE, COMPLETED, REVOKED
+  
+  // Timestamps
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  // Constraint: Each student can have only one active assignment per scholarship
+  @@unique([studentId, scholarshipId])
+  @@index([studentId])
+  @@index([scholarshipId])
+  @@index([status])
+}
+
+// Mentor Entity: Faculty/Mentor information
+model Mentor {
+  id              String    @id @default(cuid())
+  email           String    @unique @db.VarChar(255)
+  name            String    @db.VarChar(100)
+  expertise       String    @db.VarChar(200)
+  phone           String?   @db.VarChar(20)
+  department      String?   @db.VarChar(100)
+  
+  // Availability: FULL_TIME, PART_TIME, AVAILABLE
+  availability    String    @default("AVAILABLE") @db.VarChar(20)
+  maxStudents     Int       @default(10)
+  
+  // Relations
+  students        Student[] @relation("MentorStudents")
+  meetings        Meeting[]
+  
+  // Timestamps
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Indexes for efficient queries
+  @@index([email])
+  @@index([availability])
+  @@index([department])
+}
+
+// Meeting Entity: Mentorship sessions and logs
+model Meeting {
+  id              String    @id @default(cuid())
+  
+  // DateTime and duration validation
+  date            DateTime
+  duration        Int       @db.SmallInt // in minutes (0-32767)
+  notes           String?   @db.Text
+  
+  // Status: SCHEDULED, COMPLETED, CANCELLED, RESCHEDULED
+  status          String    @default("SCHEDULED") @db.VarChar(20)
+  
+  // Foreign Keys
+  studentId       String
+  student         Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  
+  mentorId        String
+  mentor          Mentor    @relation(fields: [mentorId], references: [id], onDelete: Cascade)
+  
+  // Timestamps
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Indexes for efficient queries
+  @@index([studentId])
+  @@index([mentorId])
+  @@index([status])
+  @@index([date])
+  @@index([createdAt])
+}
+
+// Progress Entity: Academic performance tracking
+model Progress {
+  id              String    @id @default(cuid())
+  
+  // GPA validation: 0.00 to 4.00
+  gpa             Decimal   @db.Decimal(3, 2)
+  
+  // Academic details
+  semester        Int       @db.SmallInt
+  academicYear    Int       @db.SmallInt
+  
+  // Status: ON_TRACK, AT_RISK, EXCELLENT, PROBATION, WARNING
+  status          String    @db.VarChar(20)
+  remarks         String?   @db.Text
+  
+  // Performance metrics
+  attendanceRate  Decimal?  @db.Decimal(5, 2) // 0-100
+  creditsEarned   Int?      @db.SmallInt
+  
+  // Foreign Key
+  studentId       String
+  student         Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  
+  // Timestamps
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Constraint: Only one progress record per student per semester
+  @@unique([studentId, semester, academicYear])
+  @@index([studentId])
+  @@index([status])
+  @@index([gpa])
+}
+
+// Deadline Entity: Important academic and scholarship deadlines
+model Deadline {
+  id              String    @id @default(cuid())
+  title           String    @db.VarChar(255)
+  description     String?   @db.Text
+  dueDate         DateTime
+  
+  // Priority: LOW, MEDIUM, HIGH, CRITICAL
+  priority        String    @default("MEDIUM") @db.VarChar(20)
+  
+  // Category: ACADEMIC, SCHOLARSHIP, MENTORSHIP, GENERAL
+  category        String    @db.VarChar(50)
+  
+  // Status tracking
+  isCompleted     Boolean   @default(false)
+  completedAt     DateTime?
+  
+  // Timestamps
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Indexes for efficient queries
+  @@index([dueDate])
+  @@index([priority])
+  @@index([category])
+  @@index([isCompleted])
+  @@index([createdAt])
+}
+
+// Course Entity: Academic courses
+model Course {
+  id              String    @id @default(cuid())
+  code            String    @unique @db.VarChar(50)
+  name            String    @db.VarChar(255)
+  description     String?   @db.Text
+  credits         Int       @default(3) @db.SmallInt
+  
+  // Course details
+  major           String?   @db.VarChar(100) // Which major(s) this course belongs to
+  semester        Int?      @db.SmallInt // Which semester typically offered (1-8)
+  
+  // Relations
+  studentCourses  StudentCourse[]
+  
+  // Timestamps
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Indexes
+  @@index([major])
+  @@index([semester])
+  @@unique([code, major])
+}
+
+// Junction Table: Many-to-Many relationship between Student and Course
+model StudentCourse {
+  id              String    @id @default(cuid())
+  
+  // Foreign Keys
+  studentId       String
+  student         Student   @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  
+  courseId        String
+  course          Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  
+  // Course performance
+  grade           String?   @db.VarChar(2) // A, A-, B+, B, B-, C+, C, D, F
+  semester        Int       @db.SmallInt
+  academicYear    Int       @db.SmallInt
+  status          String    @default("COMPLETED") @db.VarChar(20) // COMPLETED, IN_PROGRESS, PENDING
+  
+  // Timestamps
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Constraint: Each student can have only one enrollment per course per semester
+  @@unique([studentId, courseId, semester, academicYear])
+  @@index([studentId])
+  @@index([courseId])
+}
