@@ -24,7 +24,7 @@ Technology Stack:
 - API: https://studentinformationdashboard.onrender.com/api/v1
 - API Health: https://studentinformationdashboard.onrender.com/health
 
-## Run Locally (5-Minute Setup)
+## Run Locally
 
 ### Prerequisites
 
