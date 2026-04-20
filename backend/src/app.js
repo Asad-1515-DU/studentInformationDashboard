@@ -1,3 +1,13 @@
+app.get('/', (req, res) => {
+  res.status(200).json({
+    message: 'Student Information Dashboard API',
+    status: 'running',
+    version: env.apiVersion,
+    apiPrefix: `${env.apiPrefix}/${env.apiVersion}`,
+    timestamp: new Date().toISOString(),
+  });
+});
+
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
