@@ -1,6 +1,6 @@
 # Optimized Prompts Guide - Student Mentorship & Scholarship Platform
 
-A comprehensive guide of optimized prompts for developing, testing, and maintaining the ABC platform.
+A comprehensive guide of optimized prompts for developing, testing, and maintaining the A2E.
 
 ---
 

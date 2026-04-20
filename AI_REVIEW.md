@@ -1,6 +1,6 @@
 # AI Development Review - Student Mentorship & Scholarship Platform
 
-A comprehensive self-critique of the AI-assisted development process for the ABC platform.
+A comprehensive self-critique of the AI-assisted development process for the A2E.
 
 ---
 
