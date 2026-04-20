@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # ABC Platform - Student Mentorship & Scholarship System
 
 A comprehensive full-stack platform connecting students with mentors and scholarship opportunities.
