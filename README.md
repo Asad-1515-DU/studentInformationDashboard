@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # ABC Platform - Student Mentorship & Scholarship System
 
 A comprehensive full-stack platform connecting students with mentors and scholarship opportunities.
@@ -605,3 +606,6 @@ See backend and frontend package.json scripts for build and deploy commands.
 ## Conclusion
 
 This project demonstrates effective AI-assisted development with critical human oversight. The AI excelled at architecture and organization, while manual overrides were essential for security, performance, and production-readiness. The hybrid approach yielded a solid foundation that balances rapid development with code quality.
+=======
+# studentInformation
+>>>>>>> 5eecc86ea1925dd989c3bd63f1f2281c8afab5c7
